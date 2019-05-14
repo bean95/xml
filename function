@@ -1,0 +1,57 @@
+1. new maven project -> archetype-webApp
+2. 右键添加文件夹
+3. 添加 WebContent 文件夹 ：右键->properties->project facets->去掉勾选 dynamic web module->ok,再勾上
+4. @Autowired IDemoService DemoService - demoService  与实现类名相同 -- 可能多个实现类
+5. 静态资源的访问 - -把静态资源放在web-root下没问题，但不可放在WEB-INF，是受保护的，<!-- start 静态资源配置 -->
+6..tld  <function-signature>java.lang.String getAdminPath()</function-signature>  方法写全
+7.<!-- START 返回json数据失败：springmvc no converter found for return value of type -->
+8.<input type="file" />后台接收不到文件 -  1.配置multipartResolver 2. <form action="${ctx}/recordController/importExcel" method="post" enctype="multipart/form-data">
+9.Maven项目:error configuring application listener of class org.springframework.web.context.ContextLoaderListener
+     Deployment Assembly -> add -> java build path entries -> maven dependence
+
+
+定时任务： -quartz.xml+job.java+applicationContext.xml import+pom.xml jar
+-==================================================================================
+
+jsp-controller-service-dao-mapper
+
+公共页面整合
+静态资源文件夹位置
+自定义标签tld
+
+
+后端：
+事务管理
+日志打印
+shiro权限控制
+pageHelper分页
+generatorConfig代码生成
+定时任务：(1)job (2)jobDetail:指名哪个job、哪个方法 (3)trigger触发器：哪个jobDetail、执行时间 (4)触发器工厂
+缓存管理:(1)sql缓存 (2)缓存工具类
+注解式poi导出excel
+junit: dao(mybatis), service, controller
+发送邮件
+
+
+前端：
+bootStrap页面设计
+layer
+z-tree: 返回指定格式的json字符串
+
+
+
+
+****freemarker---base类
+****发送信息
+
+
+
+
+
+
+
+
+
+
+
+ 
