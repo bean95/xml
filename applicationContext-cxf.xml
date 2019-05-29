@@ -1,0 +1,67 @@
+--==CXF: 
+        pom.xml + web.xml + java + application-cxf.xml
+
+pom.xml:
+	<dependency>
+         <groupId>org.apache.cxf</groupId>
+         <artifactId>cxf-rt-frontend-jaxws</artifactId>
+         <version>3.1.11</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.cxf</groupId>
+         <artifactId>cxf-rt-transports-http</artifactId>
+         <version>3.1.11</version>
+     </dependency>
+     <dependency>
+         <groupId>org.apache.cxf</groupId>
+         <artifactId>cxf-rt-transports-http-jetty</artifactId>
+         <version>3.1.11</version>
+     </dependency>
+
+web.xml:
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext*.xml</param-value>
+	</context-param>
+	
+	<servlet>
+		<servlet-name>CXFService</servlet-name>
+		<servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
+   </servlet>
+   <servlet-mapping>
+		<servlet-name>CXFService</servlet-name>
+		<url-pattern>/ws/*</url-pattern>    <!-- 添加到访问路径 -->
+   </servlet-mapping>
+
+java
+    Interface -> @WebService
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:jaxws="http://cxf.apache.org/jaxws"
+	xsi:schemaLocation=" http://www.springframework.org/schema/beans 
+						 http://www.springframework.org/schema/beans/spring-beans.xsd 
+						 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+	<import resource="classpath:META-INF/cxf/cxf.xml" />
+	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+	<!-- CXF的3.0版本之前是需要cxf-extension-soap.xml,3.0版本之后不需要引入 -->
+	<!-- <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" /> -->
+	
+	<!-- loggingIntercepter -->
+	
+	
+	<bean id="cxfTestServiceImpl" class="com.november.first.ws.test.CXFTestImpl"/>
+	<!-- 要暴露的 接口 -->
+	<jaxws:server id="IcxfTestService" serviceClass="com.november.first.ws.test.ICXFTest" address="/cxfTestService">
+	    <jaxws:serviceBean>
+	    	<!-- 接口的具体实现 项目中使用@Component 注解来完成IOC容器的装配 没扫描这个ws包-->
+	        <ref bean="cxfTestServiceImpl"/>
+	    </jaxws:serviceBean>
+	</jaxws:server>
+	
+</beans>
+
+
+linkage: ******/ws/cxfTestService?wsdl
