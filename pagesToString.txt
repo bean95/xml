@@ -1,0 +1,56 @@
+public String toString(){
+    	final StringBuffer sb = new StringBuffer("<nav aria-label='Page navigation'>");
+        sb.append("<ul class='pagination'>");
+        sb.append("<li><a href='#' aria-label='Previous' onclick='page(1,").append(this.pageSize).append(")'>首页</a></li>");
+        if(this.hasPreviousPage){
+        	sb.append("<li><a href='#' aria-label='Previous' onclick='page(").append(this.prePage).append(",").append(this.pageSize).append(")'>上一页</a></li>");
+        }else{
+        	sb.append("<li class='disabled'><a href='#' aria-label='Previous' onclick='page(").append(this.prePage).append(",").append(this.pageSize).append(")'>上一页</a></li>");
+        }
+        
+        if(this.pages <= 10){
+        	for(int i =1;i<=this.pages;i++){
+        		if(this.pageNum == i){
+        			sb.append("<li class='active'><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+        		}else{
+        			sb.append("<li><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+        		}		
+        	}
+        }else{
+        	if(this.pageNum <= 6){
+        		for(int i =1;i<=10;i++){
+        			if(this.pageNum == i){
+            			sb.append("<li class='active'><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+            		}else{
+            			sb.append("<li><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+            		}	
+        		}
+        	}else if(this.pageNum <= this.pages - 5){
+        		for(int i = this.pageNum-5;i<=this.pageNum+4;i++){
+        			if(this.pageNum == i){
+            			sb.append("<li class='active'><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+            		}else{
+            			sb.append("<li><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+            		}
+        		}
+        	}else{
+        		for(int i=this.pages-9;i<=this.pages;i++){
+        			if(this.pageNum == i){
+            			sb.append("<li class='active'><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+            		}else{
+            			sb.append("<li><a href='#' onclick='page(").append(i).append(",").append(this.pageSize).append(")'>").append(i).append("</a></li>");
+            		}
+        		}
+        	}
+        }
+        if(this.hasNextPage){
+        	sb.append("<li><a href='#' aria-label='Next' onclick='page(").append(this.nextPage).append(",").append(this.pageSize).append(")'>下一页</a></li>");
+        }else{
+        	sb.append("<li class='disabled'><a href='#' aria-label='Next' onclick='page(").append(this.nextPage).append(",").append(this.pageSize).append(")'>下一页</a></li>");
+        }
+        sb.append("<li><a href='#' aria-label='Previous' onclick='page(").append(this.pages).append(",").append(this.pageSize).append(")'>末页</a></li>");
+        sb.append("<li><a href='#'>共&nbsp;&nbsp;<span class='label label-default'>").append(this.pages).append("</span>&nbsp;&nbsp;页&nbsp;&nbsp;<span class='label label-default'>").append(this.total).append("</span>&nbsp;&nbsp;条数据</a></li>");
+        sb.append("</ul>");
+        sb.append("</nav>");
+        return sb.toString();
+    }
