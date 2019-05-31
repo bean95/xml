@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>BANNER</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <style>*{padding:0px;margin:0px;} .banner_main_div{width:994px;height:300px;} .banner_ul{margin:0px;padding:0px;width: 994px; height: 270px;list-style:none;overflow: hidden;} .banner_ul img{ width: 994px; height: 270px; } .banner_ul li{display:none;} .banner_ul li.cur{display:inline-block;} .slide_banner_li{position:relative;height:45px;width:994px;list-style:none;} .slide_banner_li li{float:left;width:248px;height:45px;border-radius:0px;background:rgb(128,130,133);cursor:pointer;} .slide_banner_li a{ width: 248px; height: 35px; ;color:white; font-size: 14px; display: block; text-decoration: none; line-height:45px;font-weight:700;text-align:center;} .slide_banner_li li:not(.cur) a:hover{background-color: rgb(128,130,133); } .slide_banner_li li.cur{background: rgb(13,108,40);}</style>
+    <script>jQuery(function($) {
+        if ($(".banner_ul").length > 0) {
+          var _setting = {
+            interval: 3500,
+            fadeInTime: 300,
+            fadeOutTime: 200
+          };
+          var _tips = $("ul.slide_banner_li li");
+          var _banners = $("ul.banner_ul li");
+          var _count = _tips.length;
+          var _current = 0;
+          var _intervalID = null;
+          var stop = function() {
+            window.clearInterval(_intervalID)
+          };
+          var slide = function(opts) {
+            console.log("side");
+            if (opts) {
+              console.log("side_if");
+              _current = opts.current || 0
+            } else {
+              console.log("side_else");
+              _current = (_current >= (_count - 1)) ? 0 : (++_current)
+            };
+            _banners.filter(":visible").fadeOut(_setting.fadeOutTime,
+            function() {
+              _banners.eq(_current).fadeIn(_setting.fadeInTime);
+              _banners.removeClass("cur").eq(_current).addClass("cur")
+            });
+            _tips.removeClass("cur").eq(_current).addClass("cur")
+          };
+          var go = function() {
+            console.log("go");
+            stop();
+            _intervalID = window.setInterval(function() {
+              slide()
+            },
+            _setting.interval)
+          };
+          var itemMouseOver = function(target, items) {
+            console.log("itemMouseOver");
+            stop();
+            var i = $.inArray(target, items);
+            slide({
+              current: i
+            })
+          };
+          _tips.hover(function() {
+            if ($(this).attr('class') != 'cur') {
+              itemMouseOver(this, _tips)
+            } else {
+              stop()
+            }
+          },
+          go);
+          _banners.hover(stop, go);
+          console.log("go-front");
+          go()
+        }
+      });</script>
+  </head>
+  
+  <body>
+    <div class="banner_main_div" style="margin:10px auto;">
+      <ul class="banner_ul">
+        <li class="cur">
+          <img alt="" src="01.png" /></li>
+        <li>
+          <img alt="" src="02.png" /></li>
+        <li>
+          <img alt="" src="03.png" /></li>
+        <li>
+          <img alt="" src="04.png" /></li>
+      </ul>
+      <ul class="slide_banner_li" style="">
+        <li class="cur">
+          <a href="#">title01</a></li>
+        <li>
+          <a href="#">title01</a></li>
+        <li>
+          <a href="#">title01</a></li>
+        <li>
+          <a href="#">title01</a></li>
+      </ul>
+    </div>
+  </body>
+
+</html>
