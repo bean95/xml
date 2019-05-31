@@ -1,0 +1,54 @@
+package com.november.first.modules.seatinfo.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.github.pagehelper.PageHelper;
+import com.november.first.common.Pages;
+import com.november.first.modules.seatinfo.dao.SeatInfoDao;
+import com.november.first.modules.seatinfo.entity.SeatInfo;
+
+@Service
+@Transactional
+public class SeatInfoServiceImpl implements ISeatInfoService {
+
+@Autowired
+private SeatInfoDao seatInfoDao;
+
+@Override
+@Cacheable(value="myCache")
+public List<SeatInfo> findList() {
+return seatInfoDao.findList();
+}
+
+@Override
+@Cacheable(value="myCache")
+public Pages<SeatInfo> findPage(Integer pageNo, Integer pageSize) {
+PageHelper.startPage(pageNo, pageSize);
+PageHelper.orderBy("MOVIE_ID,NO");
+List<SeatInfo> list = seatInfoDao.findList();
+Pages<SeatInfo> page = new Pages<SeatInfo>(list);
+return page;
+}
+
+@Override
+@CacheEvict(value="myCache", allEntries=true)  //clean myCache after save()
+public int save(SeatInfo seat) {
+return seatInfoDao.insert(seat);
+//return 1/0;
+}
+
+@Override
+public Pages<SeatInfo> findPage(Pages<SeatInfo> page) {
+PageHelper.startPage(page.getPageNum(),page.getPages());
+PageHelper.orderBy("MOVIE_ID,NO");
+page = new Pages<SeatInfo>(seatInfoDao.findList(page));
+return page;
+}
+
+}
