@@ -1,0 +1,30 @@
+.clear{ clear:both;}
+.table100{ width:100%;}
+#header{ height:54px; overflow:hidden; padding:10px 0px 10px 0px; width:997px; margin:0px auto 0px auto;}
+#logo1{ float:left;}
+#logo2{ float:right;}
+#header_bg{ height:14px; overflow:hidden; background-image:url(/HACNet/HACNet_home.nsf/vwAllPages/newcommon/$file/header.jpg); background-position:center top; background-repeat:no-repeat; background-color:#EDEDED;}
+#main{ padding:5px 0px 5px 0px; width:997px; margin:0px auto 0px auto;}
+#left{ width:270px; float:left; }
+#logincontent{ overflow:hidden; height:60px; background-image:url(/HACNet/HACNet_home.nsf/vwAllPages/newcommon/$file/login_bg.jpg);}
+#logincontent .e{ padding:5px 10px 0px 10px;color:#52A43D; height:25px; line-height:25px; font-weight:bold; font-size:18px; font-family:Arial;}
+#logincontent .f{ height:30px; padding:1px 10px 0px 7px; line-height:30px;}
+#logincontent .a1{ display:inline-block; width:94px; color:#B59042;}
+#logincontent .a2{color:#B59042;}
+#mid{ padding:0px 0px 0px 5px; width:488px; float:left; overflow:hidden;}
+#bannerlist{ height:162px; overflow:hidden; overflow:hidden;}
+#mid .banner{height:162px; overflow:hidden; overflow:hidden;}
+#num{ height:20px; width:140px; left:350px; position:relative; top:-17px;}
+#num .num_{ cursor:pointer; font-size:12px; color:White; margin:0px 5px 0px 0px; text-align:center;  float:left; width:15px; background-color:#7D7F7E; font-family:Arial;}
+#num .selectnum{color:White; background-color:#FCAD3B;}
+#menu{ padding:5px 0px 5px 0px;}
+a.menulink{text-decoration:none;color:black;display:block;}
+a.menulink:hover{ display:block;background-color:RGB(74,151,68);color:white;text-decoration:none;}
+#right{ padding:0px 0px 0px 3px; width:230px; overflow:hidden; float:right;}
+#footer{ padding:5px 0px 5px 0px; background-color:#EDEDED; line-height:20px; text-align:center;}
+#footermenu{ height:16px; line-height:16px;}
+#footermenu span{ padding:0px 10px 0px 10px;}
+#footer p{ font-family:Arial; line-height:16px;}
+.nametxt,.keytxt{background-color:Transparent; margin:0px 10px 0px 0px; width:120px; height:22px; line-height:22px; font-size:14px; border:solid 1px #93B0CB;}
+.glow1{ filter:glow(color=#e7ff63, strength=3, enabled=0)}
+#blacklink{font-size:14px}
