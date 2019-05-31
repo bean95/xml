@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>BANNER</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE10" />
+    <script type="text/javascript" src="jquery.min.js"></script>
+    <style>body { margin: 0px; padding: 0px; } img { border: 0px; } #banner {padding: 0px; width: 717px; height: 161px; } .slides_banner { margin: 0px auto; width: 717px; height: 161px; overflow: hidden; position: relative; } .slide_banner-pic { margin: 0px; padding: 0px; width: 717px; overflow: hidden; list-style: none; } .slide_banner-pic img { width: 717px; height: 161px; } .slide_banner-pic li { display: none; } .slide_banner-pic li.cur { display: inline-block; } .slide_banner-li {height:14px;line-height:23px;position:absolute;left:40%;bottom:10px;z-index:5;width:140px;} .slide_banner-li li { margin: 0px; padding: 0px; width:10px;height:10px;margin-right:5px;line-height:23px;float: left; overflow: hidden; list-style:disc; background:#B4B4B4;border-radius:10px;cursor:pointer;} .slides_banner .more{position:absolute;left:560px;bottom:8px;height:23px;z-index:5;} .slide_banner-li a { width: 190px; height: 10px; color: #000; font-size: 12px; display: block; } .slide_banner-li a:hover { color: #F00; text-decoration: none; } .op li { background: #999999; filter: alpha(opacity=60); opacity: 0.6; } .op li.cur { background: #62b629; } .slide_banner-txt span { display: none; }</style>
+    <script>jQuery(function($) {
+        if ($(".slide_banner-pic").length > 0) {
+          var defaultOpts = {
+            interval: 5000,
+            fadeInTime: 300,
+            fadeOutTime: 200
+          };
+          var _titles_bg = $("ul.slide-txt li");
+          var _titles = $("ul.op li");
+          var _bodies = $("ul.slide_banner-pic li");
+          var _count = _titles.length;
+          var _current = 0;
+          var _intervalID = null;
+          var stop = function() {
+            window.clearInterval(_intervalID);
+          };
+          var slide = function(opts) {
+            if (opts) {
+              _current = opts.current || 0;
+            } else {
+              _current = (_current >= (_count - 1)) ? 0 : (++_current);
+            };
+            _bodies.filter(":visible").fadeOut(defaultOpts.fadeOutTime,
+            function() {
+              _bodies.eq(_current).fadeIn(defaultOpts.fadeInTime);
+              _bodies.removeClass("cur").eq(_current).addClass("cur");
+            });
+            _titles.removeClass("cur").eq(_current).addClass("cur");
+            _titles_bg.removeClass("cur").eq(_current).addClass("cur");
+          };
+          var go = function() {
+            stop();
+            _intervalID = window.setInterval(function() {
+              slide();
+            },
+            defaultOpts.interval);
+          };
+          var itemMouseOver = function(target, items) {
+            stop();
+            var i = $.inArray(target, items);
+            slide({
+              current: i
+            });
+          };
+          _titles.hover(function() {
+            if ($(this).attr('class') != 'cur') {
+              itemMouseOver(this, _titles);
+            } else {
+              stop();
+            }
+          },
+          go);
+          _bodies.hover(stop, go);
+          go();
+        }
+      });</script>
+  </head>
+  
+  <body>
+    <div>
+      <div id="banner">
+        <div class="slides_banner">
+          <ul class="slide_banner-pic">
+            <li class="cur">
+              <img alt="" src="http://hacn.intranet.cn.hsbc/HACNet/HACNet_home.nsf/vwAllPages/homefiles_2018/$file/Banner_18122403.png" /></li>
+            <li>
+              <img alt="" src="http://hacn.intranet.cn.hsbc/HACNet/HACNet_home.nsf/vwAllPages/homefiles_2018/$file/banner design_18121905.png" /></li>
+            <li>
+              <img alt="" src="http://hacn.intranet.cn.hsbc/HACNet/HACNet_home.nsf/vwAllPages/homefiles_2018/$file/Banner design_1212_1812120ng" /></li>
+          </ul>
+          <ul class="slide_banner-li op" style="">
+            <li class="cur">
+              <a href="#"></a>
+            </li>
+            <li>
+              <a href="#"></a>
+            </li>
+            <li>
+              <a href="#"></a>
+              <i>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+
+</html>
